@@ -6,6 +6,9 @@ import {
     SHOW_HISTORY_FAILURE,
     SHOW_HISTORY_REQEST,
     SHOW_HISTORY_SUCCSESS,
+    SHOW_HISTORY_ITEM_FAILURE,
+    SHOW_HISTORY_ITEM_REQEST,
+    SHOW_HISTORY_ITEM_SUCCSESS
   
 } from './types'
 import { instance, weatherinstance } from '../config/axios';
@@ -39,8 +42,8 @@ export const saveToHistory = (list) => async (dispatch) => {
 export const showToHistroy = () => async (dispatch) => {
     dispatch({ type: SHOW_HISTORY_REQEST })
     try {
-        const response = await instance.post('api/history/get', { userId: window.localStorage.token })
-        console.log(response.data)
+        const response = await instance.get('api/history')
+       // console.log(response.data)
         dispatch({ type: SHOW_HISTORY_SUCCSESS, payload: response.data })
 
     } catch (err) {
@@ -48,18 +51,18 @@ export const showToHistroy = () => async (dispatch) => {
         console.log('errr', err)
     }
 }
-/* export const showToHistroyItem = (_id) => async (dispatch) => {
+    export const showToHistroyItem = (id) => async (dispatch) => {
     dispatch({ type: SHOW_HISTORY_ITEM_REQEST })
-    console.log("ID::" , _id)
+    console.log("ID::" ,id)
     try {
-        const response = await instance.post('api/history/get', _id)
+        const response = await instance.get(`api/history/${id}`,id)
         dispatch({ type: SHOW_HISTORY_ITEM_SUCCSESS, payload: response.data })
-        console.log(response.data)
+        console.log('item::::::::',response.data)
     } catch (err) {
 
         dispatch({ type : SHOW_HISTORY_ITEM_FAILURE , payload: err})
         console.log(err)
     }
 
-} */
+}
 

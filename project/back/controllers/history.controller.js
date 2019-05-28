@@ -1,51 +1,45 @@
 const HistoryService = require('../services/history.service');
-const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose')
 
 const saveToHistory = async (req, res) => {
+    console.log("hisrory", req.user.id)
+    console.log("BODY",req.body)
     try {
-        jwt.verify(req.body.userId, 'shhhhh', async (err, decoded) => {
-            req.body.userId = decoded.id;
-        const param = { ...req.body }
-        
-            if(err){
-                console.log('ERRR',err)
-            }else{
-           //     console.log("DECODED",decoded)
-        
-     //   console.log('IIIIIIDDDDD', req.body.userId)
-       
+        const param = {
+            userId: req.user.id,
+            date: req.body.date,
+            name: req.body.name,
+            list: req.body.list
+        }
         const newHistory = await HistoryService.createHistory(param)
-      //  console.log("NEW HISTORY:::", newHistory)
+        console.log("NEW HISTORY:::", newHistory)
         res.status(200).send(newHistory);
-    }
-})
     }
     catch (err) {
         console.log(err)
         res.status(500).send(err);
     }
 }
-const findHistory = async (req ,res) => {
-    jwt.verify(req.body.userId , 'shhhhh' , async (err , decoded)=>{
-      //  console.log("USER IDD:::",decoded)
-        const param = decoded.id
+const findHistory = async (req, res) => {
+        const param = { userId: req.user.id }
         const stories = await HistoryService.getHistory(param)
-   
-        //console.log("USER IDD:::",req.body)
-    //   console.log("STORIES::::",stories)
-       res.status(200).send(stories)
-    }) 
+            
+        res.status(200).send(stories)
 }
 
-const findHistoryItem = async (req , res) => {
-    console.log(req.body)
-    const param = req.body
-    const itemlist = await HistoryService.getHistoryItem (param)
-    res.status(200).send(itemlist)
+const findHistoryItem = async (req, res) => {
+    //console.log("PAAAARAAAAMSSSSS",req.params)
+    const _id = req.params.id;
+    console.log("__IDD" , _id)
+    const param = {_id : `${_id}`}
+    console.log("PAAAARAAAAMSSSSS",param)
+    const item = await HistoryService.getHistoryItem(param)
+    console.log(item)
+    res.status(200).send(item)
 }
 
 module.exports = {
-    saveToHistory ,
+    saveToHistory,
     findHistory,
     findHistoryItem
 

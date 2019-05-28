@@ -5,8 +5,11 @@ import { showToHistroy, showToHistroyItem } from '../actions/weather.thunk';
 import { Link } from 'react-router-dom';
 //import _ from 'lodash';
 
-
 class HistoryPages extends React.Component {
+
+    componentDidMount(){
+        this.props.showToHistroy()
+    }
 
     //  (i)=> this.props.showToHistroyItem(this.props.data[i]._id)
     renderHistory() {
@@ -14,14 +17,15 @@ class HistoryPages extends React.Component {
         if (!list) {
             return <div>У вас пока нет истории запросов</div>
         } else {
+            
             return (
                 Object.keys(list).map((i) => {
                     return (<div className="ui grey segment" key={list[i]._id} style={{ padding: "20px", fontSize: "20px" }}>
                         <Link
-                            to={`/historyDetails/${i}`}
+                            to={`/historyDetails/${list[i]._id}`}
                             key={i}> {list[i].name}
                         </Link>
-                         <div className="ui right aligned container">{list[i].date}</div></div>)
+                         <div className="ui right aligned container" style={{fontSize : "14px"}}>{(new Date(Date.parse(list[i].date))).toString()}</div></div>)
                 })
             )
         }

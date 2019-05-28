@@ -15,13 +15,12 @@ const checkToken = async (req, res, next) => {
 
                 const users = await UserService.getUsers({_id: decoded.id})
                 const currentUser = users[0];
-
+                
                 req.user = currentUser;
+                console.log(req.user.id)
                 // get user by id
                 // put user to req.user
-
-
-              //  console.log("decoded:::", decoded)
+                //  console.log("decoded:::", decoded)
                 next()
             }
         })

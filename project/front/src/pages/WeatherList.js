@@ -27,15 +27,28 @@ class Weather extends React.Component {
 
 
             return (
-                Object.keys(list).map((key) => {
-                    //  console.log(key, list[key].dt_txt, list[key].main.temp - 273.15, list[key].weather[0].main);
-                    return (<tr key={key}>
-                        <td>{list[key].dt_txt}</td>
-                        <td>{list[key].main.temp - 273.15}</td>
-                        <td>{list[key].weather[0].main}</td>
-                    </tr>
-                    )
-                })
+                <table className="ui inverted blue selectable celled table"
+                    style={{ width: "100%", marginTop: "50px" }}>
+                    <thead>
+                        <tr><th>Date</th>
+                            <th>Tamp</th>
+                            <th>Weather</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>{
+                        Object.keys(list).map((key) => {
+                            //  console.log(key, list[key].dt_txt, list[key].main.temp - 273.15, list[key].weather[0].main);
+                            return (<tr key={key}>
+                                <td>{list[key].dt_txt}</td>
+                                <td>{list[key].main.temp - 273.15}</td>
+                                <td>{list[key].weather[0].main}</td>
+                            </tr>
+                            )
+                        })}
+                    </tbody>
+
+                </table>
             )
 
 
@@ -43,12 +56,9 @@ class Weather extends React.Component {
     }
     showHistory = () => {
         history.push('/history')
-        return (this.props.showToHistroy(window.localStorage.token))
-
     }
     pushHistory = () => {
         let userHisrory = {
-            userId: window.localStorage.token,
             date: new Date(),
             name: this.props.data.city.name,
             list: this.props.data.list
@@ -79,23 +89,7 @@ class Weather extends React.Component {
                         onClick={this.pushHistory}><i className="plus icon" /></button>
                 </div>
                 <div className="ui center aligned container" >
-
-
-                    <table className="ui inverted blue selectable celled table"
-                        style={{ width: "100%", marginTop: "50px" }}>
-                        <thead>
-                            <tr><th>Date</th>
-                                <th>Tamp</th>
-                                <th>Weather</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            {this.renderTable()}
-                        </tbody>
-
-                    </table>
-
+                    {this.renderTable()}
                 </div>
 
             </div>

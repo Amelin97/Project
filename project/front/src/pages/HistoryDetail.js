@@ -1,37 +1,23 @@
 import React from 'react';
-/* import {showToHistroyItem} from '../actions/weather.thunk' */
+ import {showToHistroyItem} from '../actions/weather.thunk' 
 import { connect } from 'react-redux';
 
 class HistoryDetail extends React.Component {
-
-
-    renderTable() {
-        let id = this.props.match.params.id
-        let data = this.props.data
-
-        console.log(data[id].list)
-        if (!data) {
-            return <tr></tr>
-        } else {
-            return (
-                Object.keys(data[id].list).map((key) => {
-                    return (<tr key={key}>
-                        <td>{data[id].list[key].dt_txt}</td>
-                        <td>{data[id].list[key].main.temp - 273.15}</td>
-                        <td>{data[id].list[key].weather[0].main}</td>
-                    </tr>
-                    )
-                })
-            )
-        }
+ 
+    componentDidMount(){
+        this.props.showToHistroyItem(this.props.match.params.id)
     }
 
-    render() {
-        let id = this.props.match.params.id
-        let data = this.props.data
-        return (
-            <div>
-                <h1>{data[id].name}</h1>
+    renderTable() {
+
+        let list = this.props.data.list
+        // console.log(list);
+        if (!list) {
+            return <tr></tr>
+        } else {
+
+
+            return (
                 <table className="ui inverted blue selectable celled table"
                     style={{ width: "100%", marginTop: "50px" }}>
                     <thead>
@@ -41,11 +27,34 @@ class HistoryDetail extends React.Component {
                         </tr>
                     </thead>
 
-                    <tbody>
-                        {this.renderTable()}
+                    <tbody>{
+                        Object.keys(list).map((key) => {
+                         // console.log(key, list[key].dt_txt, list[key].main.temp - 273.15, list[key].weather[0].main);
+                            return (<tr key={key}>
+                                <td>{list[key].dt_txt}</td>
+                                <td>{(list[key].main.temp - 273.15).toFixed(2)}</td>
+                                <td>{list[key].weather[0].main}</td>
+                            </tr>
+                            )
+                        })}
                     </tbody>
 
                 </table>
+            )
+
+
+        }
+    }
+
+    render() {
+    
+        let data = this.props.data 
+        return (
+            <div>
+                <h1>{data.name}</h1>
+                
+                        {this.renderTable()}
+                   
             </div>
         )
     }
@@ -53,12 +62,14 @@ class HistoryDetail extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        loading: state.historyWeather.loading,
-        data: state.historyWeather.data,
-        err: state.historyWeather.err
+        loading: state.historyItem.loading,
+        data: state.historyItem.data,
+        err: state.historyItem.err
     }
 }
 
-export default connect(mapStateToProps)(HistoryDetail);
+export default connect(mapStateToProps,{
+    showToHistroyItem
+})(HistoryDetail);
 
 

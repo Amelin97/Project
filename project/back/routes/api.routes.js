@@ -6,10 +6,10 @@ const  HistoryController = require('../controllers/history.controller')
 
 
 // path /api/user/current
-router.post('/user/current', UserController.getCurrentUser);
+router.get('/user/current', UserController.getCurrentUser);
 router.post('/history', HistoryController.saveToHistory);
-router.post('/history/get',HistoryController.findHistory)
-router.post('/history/get/item',HistoryController.findHistoryItem)
+router.get('/history',HistoryController.findHistory)
+router.get('/history/:id',HistoryController.findHistoryItem)
 
 
 // RESTFUL API (CRUD)

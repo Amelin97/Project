@@ -1,4 +1,4 @@
-/* import { SHOW_HISTORY_ITEM_FAILURE, SHOW_HISTORY_ITEM_REQEST, SHOW_HISTORY_ITEM_SUCCSESS } from '../actions/types';
+ import { SHOW_HISTORY_ITEM_FAILURE, SHOW_HISTORY_ITEM_REQEST, SHOW_HISTORY_ITEM_SUCCSESS } from '../actions/types';
 
 const INITIAL_STATE = {
     loading :false,
@@ -19,4 +19,4 @@ export default (state = INITIAL_STATE, action) => {
         default:
             return state
     }
-} */
+} 
