@@ -16,13 +16,12 @@ class HistoryPages extends React.Component {
         } else {
             return (
                 Object.keys(list).map((i) => {
-                    return (<div key={list[i]._id} style={{ padding: "20px", fontSize: "30px" }}>
-
+                    return (<div className="ui grey segment" key={list[i]._id} style={{ padding: "20px", fontSize: "20px" }}>
                         <Link
                             to={`/historyDetails/${i}`}
                             key={i}> {list[i].name}
                         </Link>
-                        - {list[i].date}</div>)
+                         <div className="ui right aligned container">{list[i].date}</div></div>)
                 })
             )
         }
@@ -30,7 +29,7 @@ class HistoryPages extends React.Component {
 
     render() {
     //    console.log('Data', this.props.data)
-        return <div>{this.renderHistory()}</div>
+        return <div className="ui raised segments">{this.renderHistory()}</div>
     }
 }
 

@@ -8,23 +8,21 @@ class HistoryDetail extends React.Component {
     renderTable() {
         let id = this.props.match.params.id
         let data = this.props.data
-        
-       console.log( data[id].list)
+
+        console.log(data[id].list)
         if (!data) {
             return <tr></tr>
-        } else {              
-            return (               
+        } else {
+            return (
                 Object.keys(data[id].list).map((key) => {
-                      return( <tr key={key}>
-                              <td>{data[id].list[key].dt_txt}</td>
-                              <td>{data[id].list[key].main.temp - 273.15}</td>
-                              <td>{data[id].list[key].weather[0].main}</td>
-                          </tr>
-                      ) 
-                  })
+                    return (<tr key={key}>
+                        <td>{data[id].list[key].dt_txt}</td>
+                        <td>{data[id].list[key].main.temp - 273.15}</td>
+                        <td>{data[id].list[key].weather[0].main}</td>
+                    </tr>
+                    )
+                })
             )
-
-
         }
     }
 
@@ -34,8 +32,8 @@ class HistoryDetail extends React.Component {
         return (
             <div>
                 <h1>{data[id].name}</h1>
-                <table className="ui celled table"
-                    style={{ width: "80%", marginTop: "50px" }}>
+                <table className="ui inverted blue selectable celled table"
+                    style={{ width: "100%", marginTop: "50px" }}>
                     <thead>
                         <tr><th>Date</th>
                             <th>Tamp</th>
