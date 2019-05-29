@@ -3,7 +3,7 @@ import {SIGN_IN , REGIST_USERS} from '../actions/types'
 
 const INTIAL_STATE = {
     isSignedIn: null,
-    userId: null,
+    token: null,
     data: [],
     error: null
 };
@@ -12,7 +12,7 @@ const INTIAL_STATE = {
 export default (state = INTIAL_STATE, action) => {
     switch (action.type) {
         case SIGN_IN:
-            return { ...state, isSignedIn: true , userId:action.payload }
+            return { ...state, isSignedIn: true , token:action.payload }
        
         case REGIST_USERS:
             return {...state/*, payload*/}

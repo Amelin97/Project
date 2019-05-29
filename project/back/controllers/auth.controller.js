@@ -14,7 +14,7 @@ const register = async (req, res) => {
             const param = { ...req.body, password: hash };
 
             const newUser = await UserService.createUser(param);
-             console.log('newUser', newUser) ;
+            console.log('newUser', newUser);
             res.status(200).send(newUser);
 
         });
@@ -56,8 +56,8 @@ const login = async (req, res) => {
 }
 
 const checkToken = async (req, res) => {
- //   console.log('check.token', req.user)
-    res.status(200).send({user: req.user});
+    //   console.log('check.token', req.user)
+    res.status(200).send({ user: req.user });
 }
 
 

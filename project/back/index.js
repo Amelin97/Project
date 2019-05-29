@@ -33,7 +33,7 @@ require('./models/user.model');
 
 var db = mongoose.connection;
 db.on('error', () => console.log('connection error'));
-db.once('open', function () {
+db.once('open',  ()=> {
   // we're connected!
   console.log('Connected');
 

@@ -3,6 +3,7 @@ import Autocomplete from 'react-google-autocomplete';
 import { addWeather, saveToHistory, showToHistroy } from '../actions/weather.thunk';
 import { connect } from 'react-redux';
 import history from '../history';
+import Table from './component/table';
 
 class Weather extends React.Component {
 
@@ -13,45 +14,16 @@ class Weather extends React.Component {
         const coords = {
             lat: lat,
             lng: lng
-        }
-        this.props.addWeather(coords)
+        };
+        this.props.addWeather(coords);
     }
-
     renderTable() {
-
-        let list = this.props.data.list
-        // console.log(list);
-        if (!list) {
+        let data = this.props.data
+        if (!data) {
             return <div></div>
         } else {
-
-
-            return (
-                <table className="ui inverted blue selectable celled table"
-                    style={{ width: "100%", marginTop: "50px" }}>
-                    <thead>
-                        <tr><th>Date</th>
-                            <th>Tamp</th>
-                            <th>Weather</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>{
-                        Object.keys(list).map((key) => {
-                            //  console.log(key, list[key].dt_txt, list[key].main.temp - 273.15, list[key].weather[0].main);
-                            return (<tr key={key}>
-                                <td>{list[key].dt_txt}</td>
-                                <td>{list[key].main.temp - 273.15}</td>
-                                <td>{list[key].weather[0].main}</td>
-                            </tr>
-                            )
-                        })}
-                    </tbody>
-
-                </table>
-            )
-
-
+            return ( <Table
+                data={data} />)
         }
     }
     showHistory = () => {
@@ -65,7 +37,7 @@ class Weather extends React.Component {
         }
         return (this.props.saveToHistory(userHisrory))
 
-    }
+    };
 
     render() {
         return (
@@ -95,8 +67,8 @@ class Weather extends React.Component {
             </div>
         )
     }
-
 }
+
 
 const mapStateToProps = (state) => {
     return {

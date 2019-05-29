@@ -5,6 +5,7 @@ import history from './history'
 import { instance } from './config/axios';
 import HistoryPages from './pages/HistoryPages'
 import HistoryDetail from './pages/HistoryDetail';
+import Header from './pages/component/Header'
 // import Autocomplete from './components/Googlemaps';
 // import OpenWeather from './components/Googlemaps';
 
@@ -33,7 +34,9 @@ class Protected extends React.Component {
 
         const { authenticated } = this.state;
         if (!authenticated) return null;
-        if (authenticated) return (
+        if (authenticated) return ( <div>
+            <Header/>
+
             <Switch>
 
                 <Route path="/" exact component={this.renderSearch} />
@@ -42,6 +45,7 @@ class Protected extends React.Component {
                 <Route path="/historyDetails/:id" exact component={HistoryDetail} />
 
             </Switch>
+            </div>
         )
         return
     };
