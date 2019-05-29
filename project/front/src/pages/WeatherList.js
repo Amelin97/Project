@@ -22,7 +22,7 @@ class Weather extends React.Component {
         let list = this.props.data.list
         // console.log(list);
         if (!list) {
-            return <tr></tr>
+            return <div></div>
         } else {
 
 

@@ -34,8 +34,6 @@ const login = async (req, res) => {
 
     try {
         if (!user) throw new Error('Username or password incorrect')
-
-
         //console.log('front password',req.body.password )
         //console.log('back password',user.password)
 

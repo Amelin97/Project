@@ -13,7 +13,7 @@ class HistoryDetail extends React.Component {
         let list = this.props.data.list
         // console.log(list);
         if (!list) {
-            return <tr></tr>
+            return <tr><td></td></tr>
         } else {
 
 

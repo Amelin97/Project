@@ -1,9 +1,9 @@
 const HistoryService = require('../services/history.service');
-const mongoose = require('mongoose')
+
 
 const saveToHistory = async (req, res) => {
-    console.log("hisrory", req.user.id)
-    console.log("BODY",req.body)
+   // console.log("hisrory", req.user.id)
+   // console.log("BODY",req.body)
     try {
         const param = {
             userId: req.user.id,
@@ -12,7 +12,7 @@ const saveToHistory = async (req, res) => {
             list: req.body.list
         }
         const newHistory = await HistoryService.createHistory(param)
-        console.log("NEW HISTORY:::", newHistory)
+      //  console.log("NEW HISTORY:::", newHistory)
         res.status(200).send(newHistory);
     }
     catch (err) {
@@ -30,11 +30,11 @@ const findHistory = async (req, res) => {
 const findHistoryItem = async (req, res) => {
     //console.log("PAAAARAAAAMSSSSS",req.params)
     const _id = req.params.id;
-    console.log("__IDD" , _id)
+   // console.log("__IDD" , _id)
     const param = {_id : `${_id}`}
-    console.log("PAAAARAAAAMSSSSS",param)
+    //console.log("PAAAARAAAAMSSSSS",param)
     const item = await HistoryService.getHistoryItem(param)
-    console.log(item)
+  //  console.log(item)
     res.status(200).send(item)
 }
 
