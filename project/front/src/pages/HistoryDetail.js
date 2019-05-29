@@ -1,10 +1,10 @@
 import React from 'react';
- import {showToHistroyItem} from '../actions/weather.thunk' 
+import { showToHistroyItem } from '../actions/weather.thunk'
 import { connect } from 'react-redux';
 
 class HistoryDetail extends React.Component {
- 
-    componentDidMount(){
+
+    componentDidMount() {
         this.props.showToHistroyItem(this.props.match.params.id)
     }
 
@@ -13,7 +13,7 @@ class HistoryDetail extends React.Component {
         let list = this.props.data.list
         // console.log(list);
         if (!list) {
-            return <tr><td></td></tr>
+            return <div></div>
         } else {
 
 
@@ -29,7 +29,7 @@ class HistoryDetail extends React.Component {
 
                     <tbody>{
                         Object.keys(list).map((key) => {
-                         // console.log(key, list[key].dt_txt, list[key].main.temp - 273.15, list[key].weather[0].main);
+                            // console.log(key, list[key].dt_txt, list[key].main.temp - 273.15, list[key].weather[0].main);
                             return (<tr key={key}>
                                 <td>{list[key].dt_txt}</td>
                                 <td>{(list[key].main.temp - 273.15).toFixed(2)}</td>
@@ -47,14 +47,12 @@ class HistoryDetail extends React.Component {
     }
 
     render() {
-    
-        let data = this.props.data 
+
+        let data = this.props.data
         return (
             <div>
                 <h1>{data.name}</h1>
-                
-                        {this.renderTable()}
-                   
+                {this.renderTable()}
             </div>
         )
     }
@@ -68,7 +66,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps,{
+export default connect(mapStateToProps, {
     showToHistroyItem
 })(HistoryDetail);
 
