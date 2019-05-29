@@ -10,7 +10,7 @@ import Header from './pages/component/Header'
 // import OpenWeather from './components/Googlemaps';
 
 class Protected extends React.Component {
-    state = {
+    state={
         authenticated: false
     }
 

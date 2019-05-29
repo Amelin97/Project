@@ -1,7 +1,7 @@
 import React from 'react';
 import { showToHistroyItem } from '../actions/weather.thunk'
 import { connect } from 'react-redux';
-import Table from './component/table'
+import Table from './component/Table'
 class HistoryDetail extends React.Component {
 
     componentDidMount() {
